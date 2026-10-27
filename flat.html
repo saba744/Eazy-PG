@@ -1,0 +1,482 @@
+   <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Listings</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .house-card {
+            display: flex;
+            flex-direction: column;
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .house-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .house-images {
+            display: flex;
+            overflow-x: auto;
+            margin-bottom: 20px;
+        }
+        .image-container {
+            display: flex;
+            flex-direction: column;
+            margin-right: 10px;
+        }
+        .image-container img {
+            width: 200px;
+            height: 150px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+        .image-container p {
+            margin: 5px 0 0 0;
+            font-size: 0.9em;
+            color: #666;
+        }
+        .house-images .image-container:last-child {
+            margin-right: 0;
+        }
+        .house-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .house-info h2 {
+            margin: 0;
+            margin-bottom: 10px;
+            color: #007BFF;
+        }
+        .house-info p {
+            margin: 5px 0;
+        }
+        .house-info .price {
+            color: #28a745;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        .house-info .availability {
+            color: #dc3545;
+            font-weight: bold;
+        }
+        .buy-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .buy-button:hover {
+            background-color: #0056b3;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 10px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .payment-message {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-size: 2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="house-card">
+        <div class="house-images">
+            <div class="image-container">
+                <img src="img4.jpg" alt="Flat 1 - Image 1">
+                <p>Bedroom</p>
+            </div>
+            <div class="image-container">
+                <img src="img2.jpg" alt="Flat 1 - Image 2">
+                <p>Kitchen</p>
+            </div>
+            <div class="image-container">
+                <img src="img3.jpg" alt="Flat 1 - Image 3">
+                <p>Living Room</p>
+            </div>
+            <div class="image-container">
+                <img src="img5.jpg" alt="Flat 1 - Image 4">
+                <p>Bathroom</p>
+            </div>
+        </div>
+         <div class="house-info">
+            <h2>Flat 1 </h2>
+            <p>Location: Kurla, Maharashtra</p>
+            <p class="price">Price: ₹64,000</p>
+            <p>Size: 1200 sq ft</p>
+            <p class="availability">Available: Yes</p>
+            <button class="buy-button" onclick="openModal('modal1')">Buy</button>
+        </div>
+    </div>
+
+
+
+    <div class="house-card">
+        <div class="house-images">
+            <div class="image-container">
+                <img src="img6.jpg" alt="Flat 2 - Image 1">
+                <p>Bedroom</p>
+            </div>
+            <div class="image-container">
+                <img src="img7.jpg" alt="Flat 2 - Image 2">
+                <p>Kitchen</p>
+            </div>
+            <div class="image-container">
+                <img src="img8.jpg" alt="Flat 2 - Image 3">
+                <p>Living Room</p>
+            </div>
+            <div class="image-container">
+                <img src="img9.jpg" alt="Flat 2 - Image 4">
+                <p>Bathroom</p>
+            </div>
+        </div>
+        <div class="house-info">
+            <h2>Flat 2</h2>
+            <p>Location: Andheri, Maharashtra</p>
+            <p class="price">Price: ₹57,000</p>
+            <p>Size: 1500 sq ft</p>
+            <p class="availability">Available: No</p>
+            <button class="buy-button" onclick="openModal('modal2')">Buy</button>
+        </div>
+    </div>
+
+
+
+
+<div class="house-card">
+        <div class="house-images">
+            <div class="image-container">
+                <img src="img10.jpg" alt="Flat 3 - Image 1">
+                <p>Bedroom</p>
+            </div>
+            <div class="image-container">
+                <img src="img11.jpg" alt="Flat 3 - Image 2">
+                <p>Kitchen</p>
+            </div>
+            <div class="image-container">
+                <img src="img12.jpg" alt="Flat 3 - Image 3">
+                <p>Living Room</p>
+            </div>
+            <div class="image-container">
+                <img src="img13.jpg" alt="Flat 3 - Image 4">
+                <p>Bathroom</p>
+            </div>
+        </div>
+        <div class="house-info">
+            <h2>Flat 3</h2>
+            <p>Location: Chembur, Maharashtra</p>
+            <p class="price">Price: ₹44,000</p>
+            <p>Size: 1300 sq ft</p>
+            <p class="availability">Available: Yes</p>
+            <button class="buy-button" onclick="openModal('modal3')">Buy</button>
+        </div>
+    </div>
+
+
+
+<div class="house-card">
+        <div class="house-images">
+            <div class="image-container">
+                <img src="img14.jpg" alt="Flat 4 - Image 1">
+                <p>Bedroom</p>
+            </div>
+            <div class="image-container">
+                <img src="img15.jpg" alt="Flat 4- Image 2">
+                <p>Kitchen</p>
+            </div>
+            <div class="image-container">
+                <img src="img16.jpg" alt="Flat 4 - Image 3">
+                <p>Living Room</p>
+            </div>
+            <div class="image-container">
+                <img src="img17.jpg" alt="Flat 4 - Image 4">
+                <p>Bathroom</p>
+            </div>
+        </div>
+        <div class="house-info">
+            <h2>Flat 4 </h2>
+            <p>Location: Bandra, Maharashtra</p>
+            <p class="price">Price: ₹65,000</p>
+            <p>Size: 1400 sq ft</p>
+            <p class="availability">Available: Yes</p>
+            <button class="buy-button" onclick="openModal('modal4')">Buy</button>
+        </div>
+    </div>
+
+
+
+
+
+<div class="house-card">
+        <div class="house-images">
+            <div class="image-container">
+                <img src="img18.jpg" alt="Flat 5 - Image 1">
+                <p>Bedroom</p>
+            </div>
+            <div class="image-container">
+                <img src="img19.jpg" alt="Flat 5 - Image 2">
+                <p>Kitchen</p>
+            </div>
+            <div class="image-container">
+                <img src="img20.jpg" alt="Flat 5 - Image 3">
+                <p>Living Room</p>
+            </div>
+            <div class="image-container">
+                <img src="img21.jpg" alt="Flat 5 - Image 4">
+                <p>Bathroom</p>
+            </div>
+        </div>
+        <div class="house-info">
+            <h2>Flat 5 </h2>
+            <p>Location: Andheri, Maharashtra</p>
+            <p class="price">Price: ₹55,000</p>
+            <p>Size: 1200 sq ft</p>
+            <p class="availability">Available: No</p>
+            <button class="buy-button" onclick="openModal('modal5')">Buy</button>
+        </div>
+    </div>
+
+
+
+<div class="house-card">
+        <div class="house-images">
+            <div class="image-container">
+                <img src="img32.jpg" alt="Flat 6 - Image 1">
+                <p>Bedroom</p>
+            </div>
+            <div class="image-container">
+                <img src="img33.jpg" alt="Flat 6 - Image 2">
+                <p>Kitchen</p>
+            </div>
+            <div class="image-container">
+                <img src="img34.jpg" alt="Flat 6 - Image 3">
+                <p>Living Room</p>
+            </div>
+            <div class="image-container">
+                <img src="img35.jpg" alt="Flat 6 - Image 4">
+                <p>Bathroom</p>
+            </div>
+        </div>
+        <div class="house-info">
+            <h2>Flat 6 </h2>
+            <p>Location: Chembur, Maharashtra</p>
+            <p class="price">Price: ₹35,000</p>
+            <p>Size: 1200 sq ft</p>
+            <p class="availability">Available: No</p>
+            <button class="buy-button" onclick="openModal('modal6')">Buy</button>
+        </div>
+    </div>
+
+
+
+<div class="house-card">
+        <div class="house-images">
+            <div class="image-container">
+                <img src="img36.jpg" alt="Flat 7 - Image 1">
+                <p>Bedroom</p>
+            </div>
+            <div class="image-container">
+                <img src="img37.jpg" alt="Flat 7 - Image 2">
+                <p>Kitchen</p>
+            </div>
+            <div class="image-container">
+                <img src="img38.jpg" alt="Flat 7 - Image 3">
+                <p>Living Room</p>
+            </div>
+            <div class="image-container">
+                <img src="img39.jpg" alt="Flat 7 - Image 4">
+                <p>Bathroom</p>
+            </div>
+        </div>
+        <div class="house-info">
+            <h2>Flat 7 </h2>
+            <p>Location: Andheri, Maharashtra</p>
+            <p class="price">Price: ₹75,000</p>
+            <p>Size: 1600 sq ft</p>
+            <p class="availability">Available: Yes</p>
+            <button class="buy-button" onclick="openModal('modal7')">Buy</button>
+        </div>
+    </div>
+
+
+
+
+    <!-- Modal 1 -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal1')">&times;</span>
+            <h2>Flat 1 Details</h2>
+            <p>Location: Kurla, Maharashtra</p>
+            <p class="price">Price: ₹64,000</p>
+            <p>Size: 1200 sq ft</p>
+            <p class="availability">Available: Yes</p>
+            <button class="buy-button" onclick="showPaymentMessage()">Proceed to Payment</button>
+        </div>
+    </div>
+
+    <!-- Modal 2 -->
+    <div id="modal2" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal2')">&times;</span>
+            <h2>Flat 2 Details</h2>
+            <p>Location: Andheri, Maharashtra</p>
+            <p class="price">Price: ₹57,000</p>
+            <p>Size: 1500 sq ft</p>
+            <p class="availability">Available: No</p>
+            <button class="buy-button" onclick="showPaymentMessage()">Proceed to Payment</button>
+        </div>
+    </div>
+
+ <!-- Modal 3-->
+    <div id="modal3" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal3')">&times;</span>
+            <h2>Flat 3 Details</h2>
+            <p>Location: Andheri, Maharashtra</p>
+            <p class="price">Price: ₹44,000</p>
+            <p>Size: 1300 sq ft</p>
+            <p class="availability">Available:Yes</p>
+            <button class="buy-button" onclick="showPaymentMessage()">Proceed to Payment</button>
+        </div>
+    </div>
+
+ <!-- Modal 4 -->
+    <div id="modal4" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal4')">&times;</span>
+            <h2>Flat 4 Details</h2>
+            <p>Location: Andheri, Maharashtra</p>
+            <p class="price">Price: ₹65,000</p>
+            <p>Size: 1400 sq ft</p>
+            <p class="availability">Available: Yes</p>
+            <button class="buy-button" onclick="showPaymentMessage()">Proceed to Payment</button>
+        </div>
+    </div>
+
+ <!-- Modal 5 -->
+    <div id="modal5" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal5')">&times;</span>
+            <h2>Flat 5 Details</h2>
+            <p>Location: Andheri, Maharashtra</p>
+            <p class="price">Price: ₹55,000</p>
+            <p>Size: 1200 sq ft</p>
+            <p class="availability">Available: Yes</p>
+            <button class="buy-button" onclick="showPaymentMessage()">Proceed to Payment</button>
+        </div>
+    </div>
+
+
+
+<!-- Modal 6 -->
+    <div id="modal6" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal6')">&times;</span>
+            <h2>Flat 6 Details</h2>
+            <p>Location: Chembur, Maharashtra</p>
+            <p class="price">Price: ₹35,000</p>
+            <p>Size: 1100 sq ft</p>
+            <p class="availability">Available: No</p>
+            <button class="buy-button" onclick="showPaymentMessage()">Proceed to Payment</button>
+        </div>
+    </div>
+
+
+
+<!-- Modal 7 -->
+    <div id="modal7" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal7')">&times;</span>
+            <h2>Flat 7 Details</h2>
+            <p>Location: Andheri, Maharashtra</p>
+            <p class="price">Price: ₹75,000</p>
+            <p>Size: 1600 sq ft</p>
+            <p class="availability">Available: Yes</p>
+            <button class="buy-button" onclick="showPaymentMessage()">Proceed to Payment</button>
+        </div>
+    </div>
+
+
+
+    <div id="paymentMessage" class="payment-message">
+        <p>Payment Successful</p>
+    </div>
+
+    <script>
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = "flex";
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
+        }
+
+        function showPaymentMessage() {
+            document.getElementById('paymentMessage').style.display = "flex";
+            setTimeout(function() {
+                document.getElementById('paymentMessage').style.display = "none";
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logout - Girls PG Hostel</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .container {
+            max-width: 600px;
+            margin: 100px auto;
+            text-align: center;
+            padding: 30px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 28px;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+        .buttons button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0 10px;
+            transition: background-color 0.3s ease-in-out;
+        }
+        .buttons button:hover {
+            background-color: #2e8b57;
+        }
+        .message {
+            display: none;
+            font-size: 20px;
+            color: #4CAF50;
+            margin-top: 20px;
+        }
+        .confirm {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .confirm:hover {
+            background-color: #2e8b57;
+        }
+        .cancel {
+            background-color: #f44336;
+            color: white;
+        }
+        .cancel:hover {
+            background-color: #d32f2f;
+        }
+        .logout-message {
+            font-size: 24px;
+            color: #2e8b57;
+            margin-top: 20px;
+        }
+    </style>
+    <script>
+        function logoutConfirm() {
+            document.querySelector('.container').style.display = 'none';
+            document.querySelector('.message').style.display = 'block';
+            document.querySelector('.logout-message').textContent = 'Thank you for visiting!';
+        }
+        
+        function cancelLogout() {
+            alert("You have chosen to stay on the page.");
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Are you sure you want to log out?</h1>
+        <div class="buttons">
+            <button class="confirm" onclick="logoutConfirm()">Confirm</button>
+            <button class="cancel" onclick="cancelLogout()">Cancel</button>
+        </div>
+        <p class="logout-message"></p>
+    </div>
+    <div class="message">
+        <p>Thank you for visiting Us!</p>
+    </div>
+</body>
+</html>
